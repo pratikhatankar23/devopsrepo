@@ -24,7 +24,7 @@ pipeline {
             steps {
 	       sh "echo ${params.EmailRecipient}"
 	       sh "echo ${params.region}"    
-               sh 'mvn clean package sonar:sonar -Dsonar.host.url=http://localhost:9000/ -DproxySet=true -DproxyHost=www-proxy.us.oracle.com -DproxyPort=80'
+               sh 'mvn clean package sonar:sonar -Dsonar.host.url=http://localhost:9000/ -DproxySet=true -DproxyHost=www-proxy.us.oracle.com -DproxyPort=80' -f CounterWebApp/pom.xml
 		  //sh 'mvn clean package -DproxySet=true -DproxyHost=www-proxy.us.oracle.com -DproxyPort=80'
 		   	nexusArtifactUploader(
     			nexusVersion: 'nexus3',
@@ -33,11 +33,11 @@ pipeline {
     			groupId: 'com.mkyong',
     			version: '1.0-SNAPSHOT',
     			repository: 'maven-snapshots',
-    			credentialsId: 'Mum_Nexus_server',
+    			credentialsId: '491ecec4-dba4-4caa-b4a6-a150a24f3eb4',
     			artifacts: [
         		[artifactId: 'CounterWebApp',
          		classifier: '',
-         		file: 'target/CounterWebApp.war',
+         		file: '/CounterWebApp/target/CounterWebApp.war',
          		type: 'war']
     			]
  		)
