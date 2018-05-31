@@ -22,9 +22,9 @@ pipeline {
    	    }
         stage('Build') {
             steps {
-	       sh "echo ${params.EmailRecipient}"
-	       sh "echo ${params.region}"    
-               sh 'mvn clean package sonar:sonar -Dsonar.host.url=http://localhost:9000/ -DproxySet=true -DproxyHost=www-proxy.us.oracle.com -DproxyPort=80' -f CounterWebApp/pom.xml
+	       bat "echo ${params.EmailRecipient}"
+	       bat "echo ${params.region}"    
+               bat 'mvn clean package sonar:sonar -Dsonar.host.url=http://localhost:9000/ -DproxySet=true -DproxyHost=www-proxy.us.oracle.com -DproxyPort=80' -f CounterWebApp/pom.xml
 		  //sh 'mvn clean package -DproxySet=true -DproxyHost=www-proxy.us.oracle.com -DproxyPort=80'
 		   	nexusArtifactUploader(
     			nexusVersion: 'nexus3',
